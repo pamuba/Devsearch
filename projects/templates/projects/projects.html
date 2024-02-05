@@ -1,0 +1,34 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<!-- {% include 'navbar.html' %} -->
+
+<h1>THE PROJECT TEMPLATE</h1>
+<p>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+</p>
+<hr>
+    <h1>Project List</h1>
+    <ul>
+        {% for project in projects %}
+            <!-- <li><a href="{{project.url}}">{{project.title}} ( -->
+            <li>TITLE: {{project.title}} -- DESCRIPTION: {{project.description}}</li>
+        {% endfor %}
+    </ul>
+<hr>
+<div>
+    Hello, {{ msg }}
+    <p>
+        {% if number > 10 %}
+        <p>The Number:{{ number }} is greter then 10 </p>
+
+        {% elif number == 10 %}
+        <p>The Number:{{ number }} is equal to 10</p>
+
+        {% else %}
+        <p>The Number:{{ number }} is less then 10</p>
+        {% endif %}
+    </p>
+</div>
+{% endblock content %}
+
