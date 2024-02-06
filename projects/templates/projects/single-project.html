@@ -5,8 +5,12 @@
 
 <h1>THE SINGLE PROJECT TEMPLATE</h1>
 
-{{project.id}}<br>
-{{project.title}}<br>
-{{project.description}}
+<h1>{{project.title}}</h1>
+<hr>
+    {% for tag in tags %}
+    <span style="border:1px solid grey">{{tag}}</span>
+    {% endfor %}
+<hr>
+<div>{{project.description}}</div>
 
 {% endblock content %}
