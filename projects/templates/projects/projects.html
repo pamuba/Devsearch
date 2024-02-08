@@ -9,14 +9,34 @@
 </p>
 <hr>
     <h1>Project List</h1>
-    <ul>
+    <table class="table table-striped">
+        <tr>
+             <th>ID</th> 
+             <th>Project</th> 
+             <th>Votes</th> 
+             <th>Ratio</th> 
+             <th></th>
+             <th></th>          
+        </tr>
         {% for project in projects %}
-            <!-- <li><a href="{{project.url}}">{{project.title}} ( -->
-            <li>TITLE: <a href="{% url 'project' project.id %}">{{project.title}}</a> -- DESCRIPTION: {{project.description}}</li>
+            <tr>
+                <td>{{project.id}}</td>
+                <td>{{project.title}}</td>
+                <td>{{project.vote_total}}</td>
+                <td>{{project.vote_ratio}}%</td>
+                <td>{{project.created}}</td>
+                <td><a href="{% url 'project' project.id %}">View</a></td>
+            </tr>
         {% endfor %}
-    </ul>
+    </table>
+    <!-- <ul> -->
+        <!-- {% for project in projects %} -->
+            <!-- <li><a href="{{project.url}}">{{project.title}} ( -->
+            <!-- <li>TITLE: <a href="{% url 'project' project.id %}">{{project.title}}</a> -- DESCRIPTION: {{project.description}}</li> -->
+        <!-- {% endfor %} -->
+    <!-- </ul> -->
 <hr>
-<div>
+<!-- <div>
     Hello, {{ msg }}
     <p>
         {% if number > 10 %}
@@ -29,6 +49,6 @@
         <p>The Number:{{ number }} is less then 10</p>
         {% endif %}
     </p>
-</div>
+</div> -->
 {% endblock content %}
 
