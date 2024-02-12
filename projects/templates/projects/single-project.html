@@ -1,10 +1,8 @@
 {% extends 'main.html' %}
-<!-- {% include 'navbar.html' %} -->
+
 
 {% block content %}
-
-<h1>THE SINGLE PROJECT TEMPLATE</h1>
-
+<img style="max-width:500px;" src="{{ project.featured_image.url }}">
 <h1>{{project.title}}</h1>
 <hr>
     {% for tag in project.tags.all %}
