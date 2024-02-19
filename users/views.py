@@ -1,5 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Profile
+from django.contrib.auth import login, authenticate
+
 
 # Create your views here.
 
@@ -17,3 +19,23 @@ def userProfile(request, pk):
 
     context = {'profile':profile, 'topSkills':topSkills, 'otherSkills':otherSkills}
     return render(request, 'users/user-profile.html', context)
+
+
+def loginPage(request):
+    if request.method == 'POST':
+        # print(request.POST)
+        username = request.POST['username']
+        password = request.POST['password']
+        try:
+            user = User.objects.get(username=username)
+        except:
+            print('Either USERNAME/PASSWORD is wrong')
+
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('profiles')
+        else:
+            print('Either USERNAME/PASSWORD is wrong')
+    context = {}
+    return render(request, 'users/login_register.html', context)
