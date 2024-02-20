@@ -2,11 +2,41 @@
 
 {% block content %}
 
+{% comment %} <script>
+    function checkEmpty()
+    {
+        var x = document.getElementByName("username").value;
+        var y = document.getElementByName("password").value;
+        
+        if(x == "" || y == ""){
+            alert("Both fields are required");
+            return false; 
+    }
+
+</script> {% endcomment %}
+
+{% if page == 'register' %}
+<h1>Register User</h1>
+
+<form action="{% url 'register' %}" method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value="Register User">
+</form>
+
+
+<p>Alredy have an account?<a href="{% url 'login' %}">Log In</a></p>
+
+
+{% else %}
 <form action="{% url 'login' %}" method="POST">
     {% csrf_token %}
     <input type="text" name="username" placeholder="Username" /><br>
     <input type="password" name="password" placeholder="Password" /><br><br>
     <input type="submit" value="Login" />
+
+    <p>Don't have an account?<a href="{% url 'register' %}">SignUp</a></p>
 </form>
+{% endif %}
 
 {% endblock content %}
