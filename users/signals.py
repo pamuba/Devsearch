@@ -19,6 +19,18 @@ def createProfile(sender, instance, created, **kwargs):
     # print('Instace:', instance)
     # print("Created:", created)
 
+def updateUser(sender, instance, created, **kwargs):
+    profile = instance
+    user = profile.user
+
+    if created == False:
+        user.first_name = profile.name
+        user.username = profile.username
+        user.email = profile.email
+        user.save()
+
+
+
 
 def delteUser(sender, instance, **kwargs):
     user = instance.user
@@ -29,7 +41,7 @@ def delteUser(sender, instance, **kwargs):
 
 # post_save is getting called whenever we create a new profile or edit an existing profile
 post_save.connect(createProfile, sender=User)
-
+post_save.connect(updateUser, sender=Profile)
 # when a User is profile is deleted User should also be deleted
 post_delete.connect(delteUser, sender=Profile)
 
