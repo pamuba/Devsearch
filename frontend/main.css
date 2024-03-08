@@ -29,3 +29,13 @@ img{
     align-items: center;
     gap:2em;
 }
+
+#form--wrapper{
+    max-width: 600px;
+    margin: 0 auto;
+    margin-top: 2em;
+    border: 1px solid #eaeaeb;
+    border-color: #fff;
+    border-radius: 5px;
+    padding:2em;
+}

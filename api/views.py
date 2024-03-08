@@ -23,7 +23,7 @@ def getRoutes(request):
 
 
 @api_view(['GET'])
-@permission_classes([IsAuthenticated])
+# @permission_classes([IsAuthenticated])
 def getProjects(request):
     print('USER:', request.user)
     projects = Project.objects.all()

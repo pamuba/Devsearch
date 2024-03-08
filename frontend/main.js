@@ -1,3 +1,21 @@
+let loginBtn = document.getElementById('login--btn')
+let logoutBtn = document.getElementById('logout--btn')
+
+let token = localStorage.getItem('token')
+if(token){
+    loginBtn.remove()
+}
+else{
+    logoutBtn.remove()
+}
+
+logoutBtn.addEventListener('click', (e)=>{
+
+    e.preventDefault()
+    localStorage.removeItem('token');
+    window.location = 'login.html'
+})
+
 let projectsUrl = 'http://127.0.0.1:8000/api/projects/'
 
 //send the token in the header
@@ -12,6 +30,7 @@ let getProjects = () => {
 
 let buildProjects = (projects) => {
     let projectsWrapper = document.getElementById('project--wrapper')
+    projectsWrapper.innerHTML = ''
     // console.log('projectsWrapper:',projectsWrapper)
     for (let i = 0; i < projects.length; i++) {
         let project = projects[i]
@@ -42,11 +61,14 @@ let addVoteEvents = () => {
     // console.log('VOTE BUTTONS:',voteBtns)
     for(let i=0; voteBtns.length > i; i++) {
         voteBtns[i].addEventListener('click', (e)=>{
+            e.preventDefault()
             // console.log('Vote was Clicked',i)
             let vote = e.target.dataset.vote
             let project = e.target.dataset.project
             // console.log(vote +"   "+project)
-            let token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA5OTE1Mjc2LCJpYXQiOjE3MDk4Mjg4NzYsImp0aSI6ImEyMmY4OGE0NWFkOTQ0NjVhMWM3OTlhNDI4ODFkN2I2IiwidXNlcl9pZCI6MTV9.GZhXyTvStD1aaY6sU5kieQJRZ3bO56kxexgIS2Cvh-k'
+            // Step 1
+            let token = localStorage.getItem('token')
+            console.log('TOKEN:', token)
             fetch(`http://localhost:8000/api/projects/${project}/vote/`, {
                 method:'POST', 
                     headers:{ 'Content-Type':'application/json',
@@ -57,7 +79,8 @@ let addVoteEvents = () => {
             )
             .then(response => response.json())
             .then(
-                data => console.log('SUCCESS')
+                data => console.log('SUCCESS:', data),
+                getProjects()
             )
         })
     }
